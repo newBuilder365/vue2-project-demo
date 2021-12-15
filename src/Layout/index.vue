@@ -1,9 +1,13 @@
 <template>
   <div>
     <el-container>
-      <el-aside width="200px">Aside</el-aside>
+      <el-aside width="200px">
+        <app-aside />
+      </el-aside>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <app-header />
+        </el-header>
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -14,14 +18,20 @@
 
 <script lang='ts'>
 import Vue from 'vue'
+import AppAside from './components/app-aside.vue'
+import AppHeader from './components/app-header.vue'
 export default Vue.extend({
-  name: 'LayoutPage'
+  name: 'LayoutPage',
+  components: {
+    AppAside,
+    AppHeader
+  }
 })
 </script>
 
 <style scoped>
 .el-header {
-  background: #b3c0d1;
+  background: #fff;
 }
 .el-aside {
   background: #d3dce6;
