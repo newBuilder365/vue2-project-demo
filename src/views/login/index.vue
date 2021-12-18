@@ -24,9 +24,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import request from '@/utils/request'
-import qs from 'qs'
 import { Form } from 'element-ui'
+import { login } from '@/services/user'
 export default Vue.extend({
   name: 'LoginPage',
   data () {
@@ -57,19 +56,13 @@ export default Vue.extend({
       try {
         await (this.$refs.form as Form).validate()
         this.buttonLoading = true
-        const { data } = await request({
-          method: 'POST',
-          url: '/front/user/login',
-          headers: { 'content-type': 'application/x-www-form-urlencoded' },
-          data: qs.stringify(this.form)
-        })
+        const { data } = await login(this.form)
         this.buttonLoading = false
         if (data.state !== 1) {
           return this.$message.error(data.message)
         }
-        this.$router.push({
-          name: 'home'
-        })
+        this.$store.commit('setUser', data.content)
+        this.$router.push(this.$route.query.redirect as string || '/')
         this.$message.success('登录成功')
       } catch (error) {
         console.log('登录失败', error)
