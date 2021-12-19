@@ -78,6 +78,14 @@ const routes: Array<RouteConfig> = [
           requiredAuth: true
         },
         component: () => import(/* webpackChunkName: 'advert-space' */'@/views/advert-space/index.vue')
+      },
+      {
+        path: '/create-edit-menu',
+        name: 'create-edit-menu',
+        meta: {
+          requiredAuth: true
+        },
+        component: () => import(/* webpackChunkName: 'create-edit-menu' */'@/views/menu/components/createOrEditMenu.vue')
       }
     ]
   },
