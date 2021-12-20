@@ -56,7 +56,6 @@ export default Vue.extend({
   data () {
     return {
       form: {
-        id: -1,
         parentId: -1,
         name: '',
         href: '',

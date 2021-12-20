@@ -86,6 +86,15 @@ const routes: Array<RouteConfig> = [
           requiredAuth: true
         },
         component: () => import(/* webpackChunkName: 'create-edit-menu' */'@/views/menu/components/createOrEditMenu.vue')
+      },
+      {
+        path: '/role/:roleId/allocMenu',
+        name: 'allocMenu',
+        meta: {
+          requiredAuth: true
+        },
+        props: true,
+        component: () => import(/* webpackChunkName: 'create-edit-menu' */'@/views/role/components/allocMenu.vue')
       }
     ]
   },

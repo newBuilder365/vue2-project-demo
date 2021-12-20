@@ -4,7 +4,13 @@
       <div slot="header" class="clearfix">
         <el-button size="mini" @click="createMenu">添加菜单</el-button>
       </div>
-      <el-table :data="tableData" border style="width: 100%" row-key="id" v-loading="loading">
+      <el-table
+        :data="tableData"
+        border
+        style="width: 100%"
+        row-key="id"
+        v-loading="loading"
+      >
         <el-table-column label="编号" align="center" type="index" width="80">
         </el-table-column>
         <el-table-column prop="name" label="菜单名称" min-width="120">
@@ -19,9 +25,7 @@
         <el-table-column prop="orderNum" label="排序" min-width="120">
         </el-table-column>
         <el-table-column min-width="130" align="center">
-          <template slot="header">
-            操作
-          </template>
+          <template slot="header"> 操作 </template>
           <template slot-scope="scope">
             <el-button size="mini" @click="handleEdit(scope.row.id)"
               >编辑</el-button
@@ -93,14 +97,27 @@ export default Vue.extend({
       })
     },
 
-    async handleDelete (id: number) {
-      this.loading = true
-      const { data } = await deleteMenu(id)
-      this.loading = false
-      if (data.code === '000000') {
-        this.$message.success('删除成功')
-        this.getAllMenu()
-      }
+    handleDelete (id: number) {
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(async () => {
+          this.loading = true
+          const { data } = await deleteMenu(id)
+          this.loading = false
+          if (data.code === '000000') {
+            this.$message.success('删除成功')
+            this.getAllMenu()
+          }
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
     }
   }
 })

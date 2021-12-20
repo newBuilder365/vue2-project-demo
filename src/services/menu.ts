@@ -1,16 +1,5 @@
 import request from '@/utils/request'
 
-interface Menu {
-  id: number,
-  parentId: number,
-  name: string,
-  href: string,
-  icon: string,
-  orderNum: number,
-  description: string,
-  shown: boolean
-}
-
 // 获取所有菜单
 export const getAllMenu = () => {
   return request({
@@ -21,7 +10,7 @@ export const getAllMenu = () => {
 }
 
 // 保存或新增菜单
-export const saveOrUpdateMenu = (data: Menu) => {
+export const saveOrUpdateMenu = (data: any) => {
   return request({
     method: 'POST',
     url: '/boss/menu/saveOrUpdate',
@@ -50,5 +39,25 @@ export const deleteMenu = (id: number) => {
   return request({
     method: 'DELETE',
     url: `/boss/menu/${id}`
+  })
+}
+
+// 获取角色拥有的菜单列表
+export const getRoleMenus = (roleId: number | string) => {
+  return request({
+    method: 'GET',
+    url: '/boss/menu/getRoleMenus',
+    params: {
+      roleId
+    }
+  })
+}
+
+// 给角色分配菜单
+export const allocateRoleMenus = (data: any) => {
+  return request({
+    method: 'POST',
+    url: '/boss/menu/allocateRoleMenus',
+    data
   })
 }
