@@ -53,7 +53,12 @@
                   roleId: scope.row.id
                 }
               })">分配菜单</el-button>
-              <el-button size="small" type="text">分配资源</el-button>
+              <el-button size="small" type="text" @click="$router.push({
+                name: 'allocResource',
+                params: {
+                  roleId: scope.row.id
+                }
+              })">分配资源</el-button>
               <el-button
                 @click="handleClick(scope.row)"
                 type="text"

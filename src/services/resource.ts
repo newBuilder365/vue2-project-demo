@@ -18,10 +18,12 @@ export const getResourcePages = (data: any) => {
 }
 
 // 查询资源分类列表
-export const getAll = (data: any) => {
+export const getAll = (roleId: any) => {
   return request({
     method: 'GET',
     url: '/boss/resource/category/getAll',
-    data
+    params: {
+      roleId
+    }
   })
 }
