@@ -27,3 +27,23 @@ export const getAll = (roleId: any) => {
     }
   })
 }
+
+// 给角色分配资源
+export const allocateRoleResources = (data: any) => {
+  return request({
+    method: 'POST',
+    url: '/boss/resource/allocateRoleResources',
+    data
+  })
+}
+
+// 获取角色拥有的资源列表
+export const getRoleResources = (roleId: any) => {
+  return request({
+    method: 'GET',
+    url: '/boss/resource/getRoleResources',
+    params: {
+      roleId
+    }
+  })
+}
